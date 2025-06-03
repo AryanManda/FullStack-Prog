@@ -60,6 +60,23 @@ const MyDropzone = ({ customerId, fetchCustomers }) => {
         </Box>
     )
 }
+// const MyDropzones = () => {
+//     const onDrop = useCallback(acceptedFiles => {
+//         // Do something with the files
+//     }, [])
+//     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+//
+//     return (
+//         <div {...getRootProps()}>
+//             <input {...getInputProps()} />
+//             {
+//                 isDragActive ?
+//                     <p>Drop the picture here ...</p> :
+//                     <p>Drag 'n' drop picture here, or click to select picture</p>
+//             }
+//         </div>
+//     )
+// }
 
 // And now we can use these
 const UpdateCustomerForm = ({fetchCustomers, initialValues, customerId}) => {
@@ -77,6 +94,7 @@ const UpdateCustomerForm = ({fetchCustomers, initialValues, customerId}) => {
                     fetchCustomers={fetchCustomers}
                 />
             </VStack>
+            {/*<MyDropzone/>*/}
             <Formik
                 initialValues={initialValues}
                 validationSchema={Yup.object({

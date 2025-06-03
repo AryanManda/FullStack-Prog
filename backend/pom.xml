@@ -7,19 +7,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.2.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.amigoscode</groupId>
-    <artifactId>amigoscode-api</artifactId>
+    <groupId>org.aryancodes</groupId>
+    <artifactId>aryancodes-api</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <docker.username>amigoscode</docker.username>
-        <docker.image.name>amigoscode-api</docker.image.name>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <docker.username>aryancodes</docker.username>
+        <docker.image.name>aryancodes-api</docker.image.name>
         <docker.image.tag/>
         <jsonwebtoken.version>0.11.5</jsonwebtoken.version>
     </properties>
@@ -61,6 +61,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -126,11 +132,6 @@
             <version>2.20.26</version>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
@@ -139,6 +140,18 @@
             <groupId>com.amazonaws.secretsmanager</groupId>
             <artifactId>aws-secretsmanager-jdbc</artifactId>
             <version>1.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -174,6 +187,19 @@
                     <excludes>
                         <exclude>**/*IntegrationTest.java</exclude>
                     </excludes>
+                    <argLine>
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.time=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                        --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                        --add-opens java.base/java.io=ALL-UNNAMED
+                        --add-opens java.base/java.net=ALL-UNNAMED
+                        --add-opens java.base/java.math=ALL-UNNAMED
+                    </argLine>
+                    <systemPropertyVariables>
+                        <org.slf4j.simpleLogger.defaultLogLevel>DEBUG</org.slf4j.simpleLogger.defaultLogLevel>
+                    </systemPropertyVariables>
+                    <useProvider47>true</useProvider47>
                 </configuration>
             </plugin>
             <plugin>
@@ -185,9 +211,19 @@
                         <include>**/*IntegrationTest.java</include>
                         <include>**/*IT.java</include>
                     </includes>
+                    <argLine>
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.time=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                        --add-opens java.base/java.util.concurrent=ALL-UNNAMED
+                        --add-opens java.base/java.io=ALL-UNNAMED
+                        --add-opens java.base/java.net=ALL-UNNAMED
+                        --add-opens java.base/java.math=ALL-UNNAMED
+                    </argLine>
                     <systemPropertyVariables>
                         <test.server.port>${tomcat.http.port}</test.server.port>
                     </systemPropertyVariables>
+                    <useProvider47>true</useProvider47>
                 </configuration>
             </plugin>
             <plugin>
@@ -214,7 +250,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <from>
-                        <image>eclipse-temurin:17</image>
+                        <image>eclipse-temurin:21</image>
                         <platforms>
                             <platform>
                                 <architecture>arm64</architecture>

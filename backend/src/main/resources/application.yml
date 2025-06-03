@@ -14,7 +14,7 @@ aws:
   s3:
     mock: true
     buckets:
-      customer: fs-amigoscode-customer-test
+      customer: fs-aryancodes-customer-test
 
 management:
   endpoints:
@@ -24,8 +24,8 @@ management:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5332/customer
-    username: amigoscode
+    url: jdbc:postgresql://localhost:5432/customer
+    username: postgres
     password: password
   jpa:
     hibernate:
@@ -37,6 +37,8 @@ spring:
     show-sql: true
   main:
     web-application-type: servlet
+
+# can work with larger files if you change the size of these files
   servlet:
     multipart:
       max-file-size: 10MB
